@@ -1,0 +1,9 @@
+﻿.form-list-row {
+    transition: transform .2s;    
+}
+
+.form-list-row:hover {
+    background-color: lightsteelblue;
+    animation: ease-in;
+    transform: scale(1.005);
+}

@@ -1,0 +1,135 @@
+﻿
+@model IEnumerable<FormstackProject.Models.Form>
+@{
+    ViewBag.Title = "Forms";
+}
+
+<h2>Form List</h2>
+
+<table class="table" id="formTable">
+    <tr class="form-list-header">
+        <th>
+            @Html.DisplayNameFor(model => model.FormId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="form-list-row" onclick="ShowFormDialog(@Html.ValueFor(modelItem => item.FormId))">
+            <td>
+                @Html.DisplayFor(modelItem => item.FormId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div id="formDialog" title="Form Info" style="display:none;">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.FormId)
+            </div>
+            <div class="col-md-8">
+                <div id="formID"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
+            <div class="col-md-8">
+                <div id="formName"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Description)
+            </div>
+            <div class="col-md-8">
+                <div id="formDescription"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                @Html.DisplayNameFor(model => model.Date)
+            </div>
+            <div class="col-md-8">
+                <div id="formDate"></div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    //Adding a padding method to the string object for date formatting.
+    //I would not normally do this within this page (this should be created ASAP when the page loads by an external JS file)
+    //but for the sake of this small project I'm leaving it here.
+    String.prototype.paddingLeft = function (paddingValue) {
+        return String(paddingValue + this).slice(-paddingValue.length);
+    };
+
+    //Turn the C# model object into json, then deserialize so that our JS code can work with it like an object
+    //If taking this approach in a real project, I would add a class definition to the JS side so that the JS code better understands what a "Form" is
+    var forms = JSON.parse('@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model))');
+
+    //Example of how to retrieve a specific form from the form array we created above
+    function GetFormById(formId) {
+        return forms.find(form => form.FormId === formId);
+    }
+
+    function ShowFormDialog(formId) {
+        var form = GetFormById(formId);
+        
+        $("#formID").text(form.FormId);
+        $("#formName").text(form.Name);
+        $("#formDescription").text(form.Description);
+
+        var dateObj = new Date(form.Date);
+        var dateString = (dateObj.getMonth() + 1).toString().paddingLeft("00") + "/" + dateObj.getDate().toString().paddingLeft("00") + "/" + dateObj.getFullYear();
+        $("#formDate").text(dateString);
+
+        $("#formDialog").css("overflow", "hidden");
+        $("#formDialog").dialog("open");
+      
+    }
+
+    $(function () {
+        // this initializes the dialog (and uses some common options that I do)
+        $("#formDialog").dialog({
+            autoOpen: false,
+            modal: true,
+            show: {
+               effect: 'fade', speed: 500
+            },
+            buttons: [
+                {
+                    text: "OK",
+                    click: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            ]
+        });
+    });
+</script>
