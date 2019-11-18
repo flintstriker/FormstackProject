@@ -84,3 +84,11 @@ C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\EntityFramework
 C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\EntityFramework.SqlServer.dll
 C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\EntityFramework.xml
 C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\EntityFramework.SqlServer.xml
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\Microsoft.Win32.Primitives.dll
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\System.Globalization.Calendars.dll
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\System.IO.Compression.ZipFile.dll
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\System.Net.Http.dll
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\System.Net.Sockets.dll
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Nick\source\repos\FormstackProject\FormstackProject\bin\roslyn\System.Threading.Tasks.Extensions.dll
